@@ -1,0 +1,19 @@
+{
+  "name": "nodjs-trs",
+  "version": "1.0.0",
+  "description": "Exploring nodjs in server side webApps",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "author": "MHMD LOAI",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
