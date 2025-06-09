@@ -14,7 +14,24 @@ const server = createServer(
 			res.writeHead(200, {"Content-Type":"application/json"});
 			res.write(JSON.stringify(users));
 			res.end();
-		}else{
+		}else if(req.url.match(/\/api\/users\/([0-9]+)/) && req.method === 'GET' ){
+			const id = req.url.split('/')[3];
+			const usr = users.find(
+				usr=>usr.id === parseInt(id)
+				);
+
+			if(usr){
+				res.writeHead(200, {"Content-Type":"application/json"});
+				res.write(JSON.stringify(usr));
+				res.end();
+			}else{
+					res.writeHead(404, {"Content-Type":"application/json"});
+					res.write(JSON.stringify({"mesg":"404 User Not Found !"}));
+					res.end();
+			}
+
+		}
+		else{
 			res.writeHead(404, {"Content-Type":"application/json"});
 			res.write(JSON.stringify({"mesg":"404 Not Found !"}));
 			res.end();
