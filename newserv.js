@@ -21,6 +21,12 @@ const jsonMiddleware = (req, res, next)=>{
 	next();
 }
 
+// Handler for GET /api/users
+const fn_getUsersHandler =(req, res)=>{
+	res.write(JSON.stringify(users));
+	res.end();
+}
+
 
 
 
