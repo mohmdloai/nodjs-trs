@@ -49,7 +49,22 @@ const fn_notFoundHandler = (req, res)=>{
 	res.end();
 }
 
-
+// server creation;
+const server = createServer(
+	(req,res)=>{
+		logger(req, res, ()=>{
+			jsonMiddleware(req, res, ()=>{
+				if(req.url === '/api/users' && req.method === 'GET'){
+					fn_getUsersHandler(req, res);
+				}else if(req.url.match(/\/api\/users\/([0-9]+)/) && req.method === 'GET' ){
+					fn_getUserHandler(req, res);
+				}else{
+					fn_notFoundHandler(req, res);
+				}
+            });
+        });
+    }
+);
 
 
 
