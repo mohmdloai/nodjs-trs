@@ -42,6 +42,13 @@ const fn_getUserHandler =(req, res)=>{
 		}
 	res.end();
 }
+// NOTFOUND HANDLER
+const fn_notFoundHandler = (req, res)=>{
+	res.statusCode = 404 ;
+	res.write(JSON.stringify({"mesg":"404 Not Found !"}));
+	res.end();
+}
+
 
 
 
