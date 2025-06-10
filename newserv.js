@@ -27,6 +27,21 @@ const fn_getUsersHandler =(req, res)=>{
 	res.end();
 }
 
+// Handler for GET /api/users/:id
+const fn_getUserHandler =(req, res)=>{
+	const id = req.url.split('/')[3];
+	const usr = users.find(
+		usr=>usr.id === parseInt(id)
+				);
+
+	if(usr){
+		res.write(JSON.stringify(usr));
+	}else{
+			res.statusCode = 404 ;
+			res.write(JSON.stringify({"mesg":"404 User Not Found !"}));
+		}
+	res.end();
+}
 
 
 
