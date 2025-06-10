@@ -8,36 +8,16 @@ const users = [
 	{id : 4, name : 'Ahmed Yala '}
 ]
 
-const server = createServer(
-	(req,res)=>{
-		if(req.url === '/api/users' && req.method === 'GET'){
-			res.writeHead(200, {"Content-Type":"application/json"});
-			res.write(JSON.stringify(users));
-			res.end();
-		}else if(req.url.match(/\/api\/users\/([0-9]+)/) && req.method === 'GET' ){
-			const id = req.url.split('/')[3];
-			const usr = users.find(
-				usr=>usr.id === parseInt(id)
-				);
+// make a logger middleware
 
-			if(usr){
-				res.writeHead(200, {"Content-Type":"application/json"});
-				res.write(JSON.stringify(usr));
-				res.end();
-			}else{
-					res.writeHead(404, {"Content-Type":"application/json"});
-					res.write(JSON.stringify({"mesg":"404 User Not Found !"}));
-					res.end();
-			}
+const logger = (req, res, next)=>{
+	console.log(`${req.method} ${req.url} ${res.statusCode}`);
+	next();
+}
 
-		}
-		else{
-			res.writeHead(404, {"Content-Type":"application/json"});
-			res.write(JSON.stringify({"mesg":"404 Not Found !"}));
-			res.end();
-		}
-	}
-	);
+
+
+
 
 server.listen(
 	PORT, ()=>{
