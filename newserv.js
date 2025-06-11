@@ -49,6 +49,22 @@ const fn_notFoundHandler = (req, res)=>{
 	res.end();
 }
 
+// Create new user api => /api/users => POST
+
+const fn_createNewUserHandler = (req, res)=>{
+	let body = '';
+	req.on('data', (chunk)=>{
+		body += chunk.toString();// to make it json
+	});
+	req.on('end', ()=>{
+		const newUser = JSON.parse(body); // to revert to js obj
+		users.push(newUser);
+		res.statusCode = 201;
+		res.write(JSON.stringify(newUser)); // to make it json
+		res.end();
+	});
+}
+
 // server creation;
 const server = createServer(
 	(req,res)=>{
@@ -58,6 +74,8 @@ const server = createServer(
 					fn_getUsersHandler(req, res);
 				}else if(req.url.match(/\/api\/users\/([0-9]+)/) && req.method === 'GET' ){
 					fn_getUserHandler(req, res);
+				}else if(req.url === '/api/users' && req.method === 'POST'){
+					fn_createNewUserHandler(req, res);
 				}else{
 					fn_notFoundHandler(req, res);
 				}
