@@ -22,3 +22,8 @@ console.log(process.argv);
 
 console.log(process.env);
 console.log(process.env.LOGNAME);//=> arch-linux-mac
+
+console.log(process.pid);
+console.log(process.cwd());
+console.log(process.memoryUsage());
+console.log(process.uptime());
